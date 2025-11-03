@@ -53,7 +53,7 @@ Abaixo está a descrição dos principais endpoints da API:
 
 {Alterar os endpoints conforme os endpoints do projeto}
 
-### **1. GET /api/usuarios**
+### **1. GET /Animal/1 **
 
 - **Descrição:** Retorna uma lista de usuários.
 - **Parâmetros de Consulta:**
