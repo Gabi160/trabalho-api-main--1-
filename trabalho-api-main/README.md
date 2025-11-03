@@ -1,6 +1,6 @@
 # trabalho-api
 
-# 🐾 Projeto Clínica Veterinária - Backend (trabalho-api)
+# 🐾 Clínica Veterinária(trabalho-api)
 
 ## 📋 Descrição
 
