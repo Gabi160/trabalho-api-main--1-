@@ -41,10 +41,6 @@ git clone https://github.com/Gabi160/trabalho-api-main--1-.git
    cd trabalho-api-main--1-
    ```
 
-3. **Configure o banco de dados:**
-
-   Edite o arquivo [application.yaml](src/main/resources/application.yaml) com as configurações do seu banco de dados.
-
 4. **Compile e execute o projeto:**
 
    ```bash
