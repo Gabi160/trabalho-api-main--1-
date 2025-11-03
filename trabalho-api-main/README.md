@@ -60,8 +60,6 @@ A documentação da API pode ser acessada por meio do Swagger. Após iniciar o b
 
 Abaixo está a descrição dos principais endpoints da API:
 
-{Alterar os endpoints conforme os endpoints do projeto}
-
 ## Endpoints
 
 Abaixo está a descrição dos principais endpoints da API:
