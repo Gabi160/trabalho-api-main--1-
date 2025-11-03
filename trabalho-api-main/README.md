@@ -60,10 +60,6 @@ A documentação da API pode ser acessada por meio do Swagger. Após iniciar o b
 
 Abaixo está a descrição dos principais endpoints da API:
 
-## Endpoints
-
-Abaixo está a descrição dos principais endpoints da API:
-
 ### **1. GET /Animal**
 
 - **Descrição:** Retorna a lista de todos os animais cadastrados.
