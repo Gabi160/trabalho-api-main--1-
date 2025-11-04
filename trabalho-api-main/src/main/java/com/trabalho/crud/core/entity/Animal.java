@@ -39,6 +39,25 @@ public class Animal {
     @Transient
     private List<String> consultas = new ArrayList<>();
 
+    // Construtor vazio (necessário pelo JPA)
+    public Animal() {
+    }
+
+    // CONSTRUTOR CORRIGIDO: Inicializa os campos, resolvendo o erro "but was: <null>"
+    public Animal(Long id, String nome, String especie, String raca) {
+        this.id = id;
+        this.nome = nome;
+        this.especie = especie;
+        this.raca = raca;
+    }
+    
+    // Construtor para casos em que o ID não é fornecido inicialmente
+    public Animal(String nome, String especie, String raca) {
+        this.nome = nome;
+        this.especie = especie;
+        this.raca = raca;
+    }
+
     // --- Getters e Setters dos campos ---
     public Long getId() {
         return id;

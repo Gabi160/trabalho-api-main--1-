@@ -1,16 +1,24 @@
 spring:
-  application:
-    name: crud
+  # Configuração da Fonte de Dados (Datasource)
+  #Baixar o banco de dados PostgresSql, configurar username a senha para integrar com a aplicação  
   datasource:
-    url: jdbc:h2:file:./data/demo
-    driverClassName: org.h2.Driver
-    Animalname: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/nome_do_seu_banco
+    username: seu_usuario_postgres 
+    password: sua_senha_postgres
+    driver-class-name: org.postgresql.Driver
+  
+  # Configuração do JPA (Java Persistence API)
   jpa:
+    show-sql: true # Mostra as queries SQL geradas no console
     hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.H2Dialect
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+      # Define a política de DDL (Data Definition Language)
+      # 'update' é comum para desenvolvimento. Use 'none' ou 'validate' em produção.
+      ddl-auto: update 
+    properties:
+      hibernate:
+        # Define o dialeto específico do PostgreSQL para otimizar as queries
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Configuração do Servidor (opcional, mas bom ter para saber a porta)
+server:
+  port: 8080

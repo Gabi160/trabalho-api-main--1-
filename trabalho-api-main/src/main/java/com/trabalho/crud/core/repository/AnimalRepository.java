@@ -1,18 +1,27 @@
 package com.trabalho.crud.core.repository;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.trabalho.crud.core.entity.Animal;
 
-public interface AnimalRepository {
+import java.util.List;
 
-	List<Animal> findAll();
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	Optional<Animal> findById(Long id);
+/**
+ * Repositório para a entidade Animal.
+ * Estende JpaRepository para herdar operações CRUD e paginação.
+ * <Animal, Long> -> (Entidade, Tipo do ID da Entidade)
+ */
+@Repository
+// Note o tipo genérico correto: <Entidade, TipoID>
+public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
-	Animal save(Animal Animal);
-
-	void deleteById(Long id);
-
+    // O Spring Data JPA automaticamente implementa métodos baseados no nome,
+    // se você precisar de consultas específicas que não sejam as operações CRUD básicas.
+    
+    // Exemplo: Encontrar todos os animais por espécie
+    List<Animal> findByEspecie(String especie);
+    
+    // Exemplo: Encontrar um animal pelo nome, ignorando o case
+    Animal findByNomeIgnoreCase(String nome);
 }

@@ -18,10 +18,11 @@ public class AnimalService {
         this.repository = repository;
     }
 
-    public Animal findById(Long id) {
-        return repository.findById(id)
-            .orElseThrow(() -> BusinessException.notFoundException("Animal não encontrado"));
-    }
+    // SEU CÓDIGO ESTÁ CORRETO: retorna Animal e lança exceção se não encontrar.
+public Animal findById(Long id) {
+    return repository.findById(id)
+        .orElseThrow(() -> BusinessException.notFoundException("Animal não encontrado"));
+}
 
     public Animal save(Animal animal) {
         return repository.save(animal);
@@ -54,4 +55,9 @@ public class AnimalService {
         Animal animal = findById(animalId);
         return animal.getConsultas();
     }
+
+    public List<Animal> findAll() {
+    // Corrigido para retornar a lista de animais do repositório
+    return (List<Animal>) repository.findAll();
+}
 }
