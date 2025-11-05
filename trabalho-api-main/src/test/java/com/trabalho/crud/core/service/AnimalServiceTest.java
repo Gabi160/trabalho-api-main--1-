@@ -7,6 +7,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
+// Adicionar este import para resolver o erro "cannot find symbol: class LocalDateTime"
+import java.time.LocalDateTime; // <--- O IMPORT QUE FALTAVA
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +43,69 @@ class AnimalServiceTest {
     }
 
     // --- TESTES DE CRIAÇÃO (CREATE) ---
+    // --- TESTE PARA UPDATE (0% no seu print) ---
+    @Test
+    @DisplayName("Deve atualizar um Animal com sucesso")
+    void shouldUpdateAnimalSuccess() {
+        // ARRANGE: Prepara dados novos para a atualização
+        Animal updatedInfo = new Animal(1L, "Rex Atualizado", "Cachorro", "Labrador");
+        
+        // Simula a busca do animal existente (ID 1L)
+        when(repository.findById(1L)).thenReturn(Optional.of(animal));
+        // Simula o salvamento do animal atualizado
+        when(repository.save(any(Animal.class))).thenReturn(updatedInfo);
+
+        // ACT: Executa o método de update
+        Animal result = service.update(1L, updatedInfo);
+
+        // ASSERT: Verifica se o resultado está correto
+        assertNotNull(result);
+        assertEquals("Rex Atualizado", result.getNome());
+        verify(repository, times(1)).findById(1L); // Verifica se a busca foi chamada
+        verify(repository, times(1)).save(any(Animal.class)); // Verifica se o save foi chamado
+    }
+
+    // --- TESTE PARA AGENDAR CONSULTA (0% no seu print) ---
+    @Test
+    @DisplayName("Deve agendar uma consulta com sucesso")
+    void shouldScheduleAppointmentSuccess() {
+        // ARRANGE
+        LocalDateTime dataConsulta = LocalDateTime.now().plusDays(1);
+        
+        // Simula a busca do animal
+        when(repository.findById(1L)).thenReturn(Optional.of(animal));
+        // Simula o salvamento (pois o método agendarConsulta chama save)
+        when(repository.save(animal)).thenReturn(animal);
+
+        // ACT: Executa o método de agendamento
+        service.agendarConsulta(1L, dataConsulta, "Dr. Silva");
+
+        // ASSERT
+        // Verifica se o método save foi chamado (provando que a lógica foi executada)
+        verify(repository, times(1)).save(animal);
+        // Verifica se a consulta foi realmente adicionada na entidade
+        assertEquals(1, animal.getConsultas().size());
+    }
+
+    // --- TESTE PARA LISTAR CONSULTAS (0% no seu print) ---
+    @Test
+    @DisplayName("Deve listar as consultas de um animal")
+    void shouldListAppointmentsSuccess() {
+        // ARRANGE
+        // Adiciona uma consulta ao mock para termos o que listar
+        animal.agendarConsulta(LocalDateTime.now(), "Dr. Teste");
+        
+        // Simula a busca do animal
+        when(repository.findById(1L)).thenReturn(Optional.of(animal));
+
+        // ACT
+        List<String> consultas = service.listarConsultas(1L);
+
+        // ASSERT
+        assertNotNull(consultas);
+        assertEquals(1, consultas.size());
+        verify(repository, times(1)).findById(1L);
+    }
     @Test
     @DisplayName("Deve salvar um Animal com sucesso")
     void shouldSaveAnimalSuccess() {
